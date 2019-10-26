@@ -57,7 +57,7 @@ namespace Problem.CashWithdraw.Web.Tests.Services
             var exception = Assert.ThrowsException<NoteUnavailableException>(() => this.accountService.Withdraw(amount));
 
             // Assert
-            Assert.AreEqual($"Dont have notes to withdraw amount {amount}. Available notes are: 10, 20, 50, 100", );
+            Assert.AreEqual($"Dont have notes to withdraw amount {amount}. Available notes are: 10, 20, 50, 100", exception.Message);
         }
 
 
