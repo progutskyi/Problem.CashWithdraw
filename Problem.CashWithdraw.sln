@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Problem.CashWithdraw.Web", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem.CashWithdraw.Web.Tests", "Problem.CashWithdraw.Web.Tests\Problem.CashWithdraw.Web.Tests.csproj", "{AF5C513D-4CC2-4FB8-B85F-A7EEBA8148D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem.CashWithdraw.Domain", "Problem.CashWithdraw.Domain\Problem.CashWithdraw.Domain.csproj", "{80E5C407-1EDD-4757-8D44-26736D2A4538}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AF5C513D-4CC2-4FB8-B85F-A7EEBA8148D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5C513D-4CC2-4FB8-B85F-A7EEBA8148D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF5C513D-4CC2-4FB8-B85F-A7EEBA8148D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E5C407-1EDD-4757-8D44-26736D2A4538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E5C407-1EDD-4757-8D44-26736D2A4538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E5C407-1EDD-4757-8D44-26736D2A4538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E5C407-1EDD-4757-8D44-26736D2A4538}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Problem.CashWithdraw.Web.Services;
 
 namespace Problem.CashWithdraw.Web
 {
@@ -29,6 +30,7 @@ namespace Problem.CashWithdraw.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            ConfigureDI(services);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -55,6 +57,11 @@ namespace Problem.CashWithdraw.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        private static void ConfigureDI(IServiceCollection services)
+        {
+            services.AddTransient<IAccountService, AccountService>();
         }
     }
 }

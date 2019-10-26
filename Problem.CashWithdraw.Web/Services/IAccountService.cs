@@ -1,7 +1,10 @@
-﻿namespace Problem.CashWithdraw.Web.Services
+﻿using Problem.CashWithdraw.Domain;
+using System.Collections.Generic;
+
+namespace Problem.CashWithdraw.Web.Services
 {
     public interface IAccountService
     {
-        int[] Withdraw(int amount);
+        IEnumerable<Note> Withdraw(int amount);
     }
 }
