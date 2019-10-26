@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem.CashWithdraw.Web", "Problem.CashWithdraw.Web\Problem.CashWithdraw.Web.csproj", "{3DE61CA4-7913-4C3E-8F58-87419DABDE73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DE61CA4-7913-4C3E-8F58-87419DABDE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE61CA4-7913-4C3E-8F58-87419DABDE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE61CA4-7913-4C3E-8F58-87419DABDE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE61CA4-7913-4C3E-8F58-87419DABDE73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E108F205-35D0-4EA8-B99D-6E02E3464799}
+	EndGlobalSection
+EndGlobal
