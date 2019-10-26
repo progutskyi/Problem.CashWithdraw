@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Problem.CashWithdraw.Domain;
+using System;
 using System.Collections.Generic;
 
 namespace Problem.CashWithdraw.Web.Services
 {
     public class AccountService : IAccountService
     {
-        public IEnumerable<Note> Withdraw(decimal amount)
+        public IEnumerable<Note> Withdraw(int? amount)
         {
             throw new NotImplementedException();
         }

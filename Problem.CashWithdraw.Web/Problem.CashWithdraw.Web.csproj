@@ -14,8 +14,12 @@
 
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\css\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Problem.CashWithdraw.Domain\Problem.CashWithdraw.Domain.csproj" />
   </ItemGroup>
 
 </Project>

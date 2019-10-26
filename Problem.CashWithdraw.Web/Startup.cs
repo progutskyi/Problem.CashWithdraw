@@ -43,7 +43,6 @@ namespace Problem.CashWithdraw.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 
