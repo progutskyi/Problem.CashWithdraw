@@ -36,7 +36,7 @@ namespace Problem.CashWithdraw.Web.Tests.Services
             var exception = Assert.ThrowsException<ArgumentException>(() => this.accountService.Withdraw(invalidArgument));
 
             // Assert
-            Assert.AreEqual("Amount should be greated thatn zero", exception.Message);
+            Assert.AreEqual("Amount should be greated than zero", exception.Message);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Problem.CashWithdraw.Web.Tests.Services
             var exception = Assert.ThrowsException<NoteUnavailableException>(() => this.accountService.Withdraw(amount));
 
             // Assert
-            Assert.AreEqual($"Dont have notes to withdraw amount {amount}. Available notes are: 10, 20, 50, 100", exception.Message);
+            Assert.AreEqual($"Dont have notes to withdraw amount {amount}. Available notes are: 100,50,20,10", exception.Message);
         }
 
 
@@ -65,7 +65,7 @@ namespace Problem.CashWithdraw.Web.Tests.Services
         [TestMethod]
         [DataRow(10, new[] { 10 })]
         [DataRow(20, new[] { 20 })]
-        [DataRow(50, new[] { 30 })]
+        [DataRow(50, new[] { 50 })]
         [DataRow(100, new[] { 100 })]
         [DataRow(30, new[] { 20, 10 })]
         [DataRow(80, new[] { 50, 20, 10 })]
