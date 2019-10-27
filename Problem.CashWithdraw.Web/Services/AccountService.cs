@@ -64,9 +64,7 @@ namespace Problem.CashWithdraw.Web.Services
             return returnNotes;
         }
 
-        private Note GetFirstNoteThatIsLessOrEqualToAmout(int amount)
-        {
-            return this.availableNotes.FirstOrDefault(n => n.Value <= amount);
-        }
+        private Note GetFirstNoteThatIsLessOrEqualToAmout(int amount) => 
+            this.availableNotes.FirstOrDefault(n => n.Value <= amount);
     }
 }

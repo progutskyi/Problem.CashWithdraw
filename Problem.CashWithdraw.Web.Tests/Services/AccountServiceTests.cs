@@ -57,7 +57,7 @@ namespace Problem.CashWithdraw.Web.Tests.Services
             var exception = Assert.ThrowsException<NoteUnavailableException>(() => this.accountService.Withdraw(amount));
 
             // Assert
-            Assert.AreEqual($"Dont have notes to withdraw amount {amount}. Available notes are: 100,50,20,10", exception.Message);
+            Assert.AreEqual($"Don't have notes to withdraw amount {amount}. Available notes are: 100,50,20,10", exception.Message);
         }
 
 
@@ -65,15 +65,19 @@ namespace Problem.CashWithdraw.Web.Tests.Services
         [TestMethod]
         [DataRow(10, new[] { 10 })]
         [DataRow(20, new[] { 20 })]
-        [DataRow(50, new[] { 50 })]
-        [DataRow(100, new[] { 100 })]
         [DataRow(30, new[] { 20, 10 })]
+        [DataRow(40, new[] { 20, 20 })]
+        [DataRow(50, new[] { 50 })]
+        [DataRow(60, new[] { 50, 10 })]
+        [DataRow(70, new[] { 50, 20 })]
         [DataRow(80, new[] { 50, 20, 10 })]
-        [DataRow(140, new[] { 100, 20, 20 })]
+        [DataRow(90, new[] { 50, 20, 20 })]
+        [DataRow(100, new[] { 100 })]
         [DataRow(160, new[] { 100, 50, 10 })]
         [DataRow(190, new [] { 100, 50, 20, 20 })]
         [DataRow(200, new[] { 100, 100 })]
-        [DataRow(230, new[] { 100, 100, 20, 10 })]
+        [DataRow(280, new[] { 100, 100, 50, 20, 10 })]
+        [DataRow(490, new[] { 100, 100, 100, 100, 50, 20, 20 })]
         public void ShouldReturnMinimumNotesForAmoutThatBrokesDownIntoNotes(int amount, IEnumerable<int> expectedNotes)
         {
             // Act

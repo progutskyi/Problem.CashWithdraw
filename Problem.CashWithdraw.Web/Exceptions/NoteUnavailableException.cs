@@ -10,7 +10,7 @@ namespace Problem.CashWithdraw.Web.Exceptions
     public class NoteUnavailableException : Exception
     {
         public NoteUnavailableException(int amount, IEnumerable<Note> availableNotes)
-            : base($"Dont have notes to withdraw amount {amount}. Available notes are: {availableNotes.GetNotesValueString()}")
+            : base($"Don't have notes to withdraw amount {amount}. Available notes are: {availableNotes.GetNotesValueString()}")
         {
         }
     }
