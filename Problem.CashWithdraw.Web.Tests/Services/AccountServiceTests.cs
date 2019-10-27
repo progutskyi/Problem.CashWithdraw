@@ -4,7 +4,6 @@ using Problem.CashWithdraw.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Problem.CashWithdraw.Web.Tests.Services
 {
@@ -59,8 +58,6 @@ namespace Problem.CashWithdraw.Web.Tests.Services
             // Assert
             Assert.AreEqual($"Don't have notes to withdraw amount {amount}. Available notes are: 100,50,20,10", exception.Message);
         }
-
-
 
         [TestMethod]
         [DataRow(10, new[] { 10 })]

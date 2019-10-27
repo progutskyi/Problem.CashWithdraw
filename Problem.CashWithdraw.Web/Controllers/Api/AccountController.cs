@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Problem.CashWithdraw.Web.Exceptions;
+using Problem.CashWithdraw.Web.Models;
 using Problem.CashWithdraw.Web.Services;
 
 namespace Problem.CashWithdraw.Web.Controllers.Api
@@ -20,9 +20,27 @@ namespace Problem.CashWithdraw.Web.Controllers.Api
         }
 
         [HttpPut]
+        [Route("withdraw")]
         public IActionResult WithdrawMoney(int amount)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var notes = this.accountService.Withdraw(amount);
+
+                return this.Ok(notes.Select(NoteViewModel.FromNote));
+            }
+            catch (ArgumentException)
+            {
+                return this.BadRequest($"Withdraw amount {amount} should be greater than zero");
+            }
+            catch (NoteUnavailableException ex)
+            {
+                return this.BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return this.StatusCode((int)HttpStatusCode.InternalServerError, "Unknown error occured");
+            }
         }
     }
 }

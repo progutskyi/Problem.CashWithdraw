@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Problem.CashWithdraw.Domain;
 using Problem.CashWithdraw.Web.Controllers.Api;
@@ -7,7 +8,9 @@ using Problem.CashWithdraw.Web.Models;
 using Problem.CashWithdraw.Web.Services;
 using Problem.CashWithdraw.Web.Tests.Builders;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web.Http.Results;
 using BadRequestResult = Microsoft.AspNetCore.Mvc.BadRequestResult;
@@ -26,22 +29,20 @@ namespace Problem.CashWithdraw.Web.Tests.Controllers
         }
 
         [TestMethod]
-        public void ShouldReturnBadRequestWhenAccountServiceThrowsArgumentException(int invalidArgument)
+        public void ShouldReturnBadRequestWhenAccountServiceThrowsArgumentException()
         {
             // Arrange
-            const int InvalidArgument = -1;
-            this.accountService.Setup(a => a.Withdraw(InvalidArgument))
+            const int InvalidAmount = -1;
+            this.accountService.Setup(a => a.Withdraw(InvalidAmount))
                 .Throws(new ArgumentException());
 
             // Act
-            var actualResult = this.accountController.WithdrawMoney(invalidArgument) as BadRequestResult;
+            var actualResult = this.accountController.WithdrawMoney(InvalidAmount) as BadRequestObjectResult;
 
             // Assert
             Assert.IsNotNull(actualResult);
             Assert.AreEqual(400, actualResult.StatusCode);
-
-            var error = this.accountController.ModelState.GetValueOrDefault("Value");
-            Assert.AreEqual("Withdraw amount should be greater than zero", error.Errors[0].ErrorMessage);
+            Assert.AreEqual($"Withdraw amount {InvalidAmount} should be greater than zero", (string)actualResult.Value);
         }
 
         [TestMethod]
@@ -53,14 +54,12 @@ namespace Problem.CashWithdraw.Web.Tests.Controllers
                 .Throws(new NoteUnavailableException(NoteUnavailableAmount, Enumerable.Empty<Note>()));
 
             // Act
-            var actualResult = this.accountController.WithdrawMoney(NoteUnavailableAmount) as BadRequestResult;
+            var actualResult = this.accountController.WithdrawMoney(NoteUnavailableAmount) as BadRequestObjectResult;
 
             // Assert
             Assert.IsNotNull(actualResult);
             Assert.AreEqual(400, actualResult.StatusCode);
-
-            var error = this.accountController.ModelState.GetValueOrDefault("Value");
-            Assert.AreEqual($"Don't have notes to withdraw amount {NoteUnavailableAmount}. Available notes are: ", error.Errors[0].ErrorMessage);
+            Assert.AreEqual($"Don't have notes to withdraw amount {NoteUnavailableAmount}. Available notes are: ", (string)actualResult.Value);
         }
 
         [TestMethod]
@@ -77,10 +76,13 @@ namespace Problem.CashWithdraw.Web.Tests.Controllers
             this.accountService.Setup(a => a.Withdraw(Amount)).Returns(withdrawNotes);
 
             // Act
-            var actualResult = this.accountController.WithdrawMoney(Amount) as OkNegotiatedContentResult<IEnumerable<NoteViewModel>>;
+            var actualResult = this.accountController.WithdrawMoney(Amount) as OkObjectResult;
+            var notesViewModelCollection = actualResult.Value as IEnumerable<NoteViewModel>;
 
             // Assert
-            CollectionAssert.AreEqual(actualResult.Content.ToList(), withdrawNotes.Select(NoteViewModel.FromNote).ToList());
+            Assert.AreEqual(200, actualResult.StatusCode);
+            Assert.IsNotNull(notesViewModelCollection);
+            CollectionAssert.AreEqual(notesViewModelCollection.Select(n => n.Value).ToList(), withdrawNotes.Select(w => w.Value).ToList());
         }
     }
 }
