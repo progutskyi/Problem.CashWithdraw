@@ -22,3 +22,13 @@ Or run the following command in the solution directory
 ```
 dotnet run --project .\Problem.CashWithdraw.Web\Problem.CashWithdraw.Web.csproj
 ```
+## Running tests
+
+You can either run all tests from Visual Studio Test explorer
+
+or
+
+run the following command in the solution directory:
+```
+dotnet test .\Problem.CashWithdraw.Web.Tests\Problem.CashWithdraw.Web.Tests.csproj
+```
