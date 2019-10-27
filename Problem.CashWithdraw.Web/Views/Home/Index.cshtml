@@ -18,7 +18,6 @@
 </div>
 <script type="text/javascript">
     function withdrawClick() {
-
         let contentDiv = document.getElementById('content');
         contentDiv.innerText = '';
 
@@ -49,7 +48,7 @@
         contentDiv.appendChild(h3);
 
         for (note of res) {
-            let p = createNoteParagraph(p);
+            let p = createNoteParagraph(note);
             contentDiv.appendChild(p)
         }
     }
@@ -66,6 +65,8 @@
     function createBillIcon() {
         let i = document.createElement('i');
         i.classList = 'fas fa-money-bill';
+
+        return i;
     }
 
     function withdrawMoney(amount) {
@@ -82,6 +83,7 @@
                     reject(ajax.response.error);
                 }
             };
+
             ajax.onerror = () => reject(ajax.response);
 
             ajax.send();

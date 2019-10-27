@@ -41,8 +41,10 @@ namespace Problem.CashWithdraw.Web.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(actualResult);
+
+            var response = actualResult.Value as ErrorModel;
             Assert.AreEqual(400, actualResult.StatusCode);
-            Assert.AreEqual($"Withdraw amount {InvalidAmount} should be greater than zero", (string)actualResult.Value);
+            Assert.AreEqual($"Withdraw amount {InvalidAmount} should be greater than zero", response.Error);
         }
 
         [TestMethod]
@@ -58,8 +60,10 @@ namespace Problem.CashWithdraw.Web.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(actualResult);
+
+            var response = actualResult.Value as ErrorModel;
             Assert.AreEqual(400, actualResult.StatusCode);
-            Assert.AreEqual($"Don't have notes to withdraw amount {NoteUnavailableAmount}. Available notes are: ", (string)actualResult.Value);
+            Assert.AreEqual($"Don't have notes to withdraw amount {NoteUnavailableAmount}. Available notes are: ", response.Error); 
         }
 
         [TestMethod]

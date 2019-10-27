@@ -31,11 +31,11 @@ namespace Problem.CashWithdraw.Web.Controllers.Api
             }
             catch (ArgumentException)
             {
-                return this.BadRequest(new { error = $"Withdraw amount {amount} should be greater than zero" });
+                return this.BadRequest(new ErrorModel { Error = $"Withdraw amount {amount} should be greater than zero" });
             }
             catch (NoteUnavailableException ex)
             {
-                return this.BadRequest(new { error = ex.Message });
+                return this.BadRequest(new ErrorModel { Error = ex.Message });
             }
             catch (Exception)
             {
