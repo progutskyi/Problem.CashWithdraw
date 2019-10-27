@@ -31,15 +31,15 @@ namespace Problem.CashWithdraw.Web.Controllers.Api
             }
             catch (ArgumentException)
             {
-                return this.BadRequest($"Withdraw amount {amount} should be greater than zero");
+                return this.BadRequest(new { error = $"Withdraw amount {amount} should be greater than zero" });
             }
             catch (NoteUnavailableException ex)
             {
-                return this.BadRequest(ex.Message);
+                return this.BadRequest(new { error = ex.Message });
             }
             catch (Exception)
             {
-                return this.StatusCode((int)HttpStatusCode.InternalServerError, "Unknown error occured");
+                return this.StatusCode((int)HttpStatusCode.InternalServerError, new { error = "Unknown error occured" });
             }
         }
     }

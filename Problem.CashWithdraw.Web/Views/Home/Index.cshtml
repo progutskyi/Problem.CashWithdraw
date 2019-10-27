@@ -3,4 +3,88 @@
     ViewData["Title"] = "Cash withdraw";
 }
 
-<h1>Hello world</h1>
+<div class="mt-4">
+    <div class="form-group row">
+        <label class="col-2 col-form-label" for="amountInput">Withdraw Amount:</label>
+        <input type="text" id="amountInput" class="col-4 form-control" />
+    </div>
+    <div class="form-group row">
+        <div class="col-1">
+            <button type="submit" class="btn btn-primary" onclick="withdrawClick()">Withdraw</button>
+        </div>
+    </div>
+    <div id="content">
+    </div>
+</div>
+<script type="text/javascript">
+    function withdrawClick() {
+
+        let contentDiv = document.getElementById('content');
+        contentDiv.innerText = '';
+
+        let inputValue = document.getElementById('amountInput').value;
+        let regex = /^-?[0-9]+$/;
+
+        if (!regex.test(inputValue)) {
+            alert('Input can contain only digits and "-" sign');
+            return;
+        }
+
+        if (inputValue.length > 6) {
+            alert('Withdrawal amount too big');
+            return;
+        }
+
+        let promise = withdrawMoney(inputValue);
+
+        promise
+            .then(res => processResponse(res, contentDiv))
+            .catch(err => contentDiv.innerText = "Error: " + err);
+    }
+
+    function processResponse(res, contentDiv) {
+        var h3 = document.createElement('h3');
+        h3.innerText = 'Notes:';
+
+        contentDiv.appendChild(h3);
+
+        for (note of res) {
+            let p = createNoteParagraph(p);
+            contentDiv.appendChild(p)
+        }
+    }
+
+    function createNoteParagraph(note) {
+        let p = document.createElement('p');
+        p.innerText = note.value + " ";
+        p.classList.add('mb-0');
+        p.appendChild(createBillIcon());
+
+        return p;
+    }
+
+    function createBillIcon() {
+        let i = document.createElement('i');
+        i.classList = 'fas fa-money-bill';
+    }
+
+    function withdrawMoney(amount) {
+        var ajax = new XMLHttpRequest();
+
+        ajax.open('PUT', `/api/account/withdraw?amount=${amount}`);
+        ajax.responseType = 'json';
+
+        return new Promise((resolve, reject) => {
+            ajax.onload = () => {
+                if (ajax.status == 200) {
+                    resolve(ajax.response);
+                } else {
+                    reject(ajax.response.error);
+                }
+            };
+            ajax.onerror = () => reject(ajax.response);
+
+            ajax.send();
+        });
+    }
+</script>
